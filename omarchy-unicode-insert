@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Copy a character to the clipboard, then paste it into the focused window.
+
+# Two reasons this exists instead of calling omarchy-clipboard-paste-text:
+# 1. --type text/plain is mandatory. wl-copy infers the type from the data when it is omitted, and a single ASCII byte ("A", "5", "=") is inferred as application/octet-stream. The clipboard then offers no text type at all, so every application pastes nothing. Multi-byte UTF-8 happens to be inferred as text.
+# 2. The character has to survive on the clipboard afterwards, so wl-copy is left running rather than killed off the way omarchy-menu-emoji-insert does it.
+
+char="${1:-}"
+[[ -n $char ]] || exit
+
+printf '%s' "$char" | wl-copy --type text/plain
+
+# Let the picker's layer surface release keyboard focus before the keystroke
+sleep 0.15
+
+wtype -M shift -k Insert -m shift 2>/dev/null || true
