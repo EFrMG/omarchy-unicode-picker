@@ -2,6 +2,8 @@
 
 An [Omarchy](https://omarchy.org/) shell plugin that searches, copies, and types any Unicode character.
 
+![Preview](./preview.png)
+
 It ships the (almost) full Unicode dataset comprised of ~47,000 code points: symbols, punctuation, arrows, box drawing, math operators, scripts, and emoji; with a name / keyword index, so you can find a character by typing what it is called.
 
 It's a fullscreen overlay in the same style as Omarchy's built-in emoji picker, keyboard-first with `CTRL + {h,j,k,l}` support and mouse as a fallback.
