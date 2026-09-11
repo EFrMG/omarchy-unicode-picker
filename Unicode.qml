@@ -12,6 +12,8 @@ Item {
   property string omarchyPath: Quickshell.env("OMARCHY_PATH")
   property var shell: null
   property var manifest: null
+  // Derive the plugin directory from the loaded QML file's own URL rather than from manifest.__sourceDir, which the host strips for third-party plugins
+  readonly property url pluginDir: Qt.resolvedUrl(".")
 
   property bool opened: false
   property string filterText: ""
@@ -198,16 +200,16 @@ Item {
 
     root.dismiss()
     // Plugin-local rather than omarchy-clipboard-paste-text: that one pipes to a bare wl-copy, which infers application/octet-stream for a single ASCII byte and leaves the clipboard with no text type for anything to paste
-    if (!root.manifest || !root.manifest.__sourceDir) return
-    Quickshell.execDetached([root.manifest.__sourceDir + "/omarchy-unicode-insert", char])
+    var scriptUrl = Qt.resolvedUrl("omarchy-unicode-insert")
+    var scriptPath = decodeURIComponent(scriptUrl.toString().replace(/^file:\/\//, ""))
+    Quickshell.execDetached([scriptPath, char])
   }
 
   ListModel { id: displayModel }
 
   FileView {
-    // Loads from this plugin's own directory
-    // Stays empty until the manifest lands
-    path: root.manifest && root.manifest.__sourceDir ? root.manifest.__sourceDir + "/unicode.json" : ""
+    // Resolved relative to the QML file
+    path: Qt.resolvedUrl("unicode.json").toString()
     onLoaded: root.loadCharacters(text())
   }
   PanelWindow {
