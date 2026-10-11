@@ -209,7 +209,7 @@ Item {
 
   FileView {
     // Resolved relative to the QML file
-    // FileView wants a plain path, not a file:// URL
+    // It supports % in URL
     path: decodeURIComponent(Qt.resolvedUrl("unicode.json").toString().replace(/^file:\/\//, ""))
     onLoaded: root.loadCharacters(text())
   }
