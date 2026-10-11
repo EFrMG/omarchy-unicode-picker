@@ -52,4 +52,6 @@ Filtering is a plain substring match over each entry's keyword string, done in `
 
 ## License
 
-[MIT](LICENSE)
+The plugin code is licensed under [MIT](LICENSE).
+
+`unicode.json` contains Unicode character names derived from the Unicode Character Database through Python's `unicodedata` module. The Unicode data is covered by the [Unicode license](LICENSE-unicode), reproduced from <https://www.unicode.org/license.txt>. The exact Unicode database version used to generate the checked-in dataset is not recorded.
