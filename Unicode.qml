@@ -210,7 +210,7 @@ Item {
   FileView {
     // Resolved relative to the QML file
     // It supports % in URL
-    path: decodeURIComponent(Qt.resolvedUrl("unicode.json").toString().replace(/^file:\/\//, ""))
+    path: decodeURIComponent(Qt.resolvedUrl("unicode.json").toString())
     onLoaded: root.loadCharacters(text())
   }
   PanelWindow {
