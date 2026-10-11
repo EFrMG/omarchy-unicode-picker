@@ -9,7 +9,7 @@
 char="${1:-}"
 [[ -n $char ]] || exit
 
-printf '%s' "$char" | wl-copy --type text/plain
+printf '%s' "$char" | wl-copy --type text/plain || exit
 
 # Let the picker's layer surface release keyboard focus before the keystroke
 sleep 0.15
